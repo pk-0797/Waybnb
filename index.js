@@ -16,6 +16,8 @@ const listingRoute = require("./routes/listingRoutes.js");
 const reviewRoute = require("./routes/reviewRoutes.js");
 const userRoute = require("./routes/UserRoutes.js");
 const e = require("connect-flash");
+const { render } = require("ejs");
+const Listing = require("./models/listings.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -76,6 +78,11 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
   next();
+});
+
+app.get("/", async (req, res) => {
+  let allListings = await Listing.find({});
+  res.render("listings/index.ejs", { allListings });
 });
 
 app.use("/listings", listingRoute);

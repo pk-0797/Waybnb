@@ -1,28 +1,29 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
-  <body>
-    <div class="container my-5">
-      <h1 class="text-center mb-4">All Listings</h1>
+<body>
+  <div class="container my-5">
+    <h1 class="text-center mb-5 fw-bold">🏡 Explore Our Beautiful Homes</h1>
 
-      <div class="row g-4">
-        <% for(let listing of allListings) { %>
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card h-100 shadow-sm">
-              <a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark">
-                <img src="<%= listing.image.url %>" class="card-img-top img-fluid"
-                  style="max-height: 250px; object-fit: cover;" alt="<%= listing.title %>">
-                <div class="card-body">
-                  <h5 class="card-title text-truncate">
-                    <%= listing.title %>
-                  </h5>
-                  <span class="card-link text-truncate">
-                    ₹ <%= listing.price %>/-
-                  </span>
-                </div>
-              </a>
+    <div class="row g-4">
+      <% for(let listing of allListings) { %>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card h-100 shadow-sm listing-card">
+            <div class="image-wrapper">
+              <img src="<%= listing.image.url %>" class="card-img-top listing-img" alt="<%= listing.title %>">
+              <span class="price-badge">₹ <%= listing.price %>/-</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><%= listing.title %></h5>
+              <p class="card-text text-muted small">
+                <i class="fa fa-map-marker-alt"></i> <%= listing.location || "Unknown Location" %>
+              </p>
+              <div class="mt-auto">
+                <a href="/listings/<%= listing._id %>" class="btn explore-btn w-100">✨ Explore Home</a>
+              </div>
             </div>
           </div>
-          <% } %>
-      </div>
+        </div>
+      <% } %>
     </div>
-  </body>
+  </div>
+</body>
