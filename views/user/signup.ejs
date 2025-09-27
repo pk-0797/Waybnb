@@ -1,0 +1,39 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<body>
+  <div class="container my-5">
+    <h4 class="text-center mb-4">Sign Up to Waybnb</h4>
+
+    <form action="/signup" method="post" class="card p-4 shadow-sm">
+
+      <div class="mb-3">
+        Username :
+        <input type="text" 
+               name="username" 
+               placeholder="enter your username" 
+               class="form-control" 
+               required>
+      </div>
+
+      <div class="mb-3">
+        Email :
+        <input type="email" 
+               name="email" 
+               placeholder="enter your email" 
+               class="form-control" 
+               required>
+      </div>
+
+      <div class="mb-3">
+        Password :
+        <input type="password" 
+               name="password" 
+               placeholder="enter your password" 
+               class="form-control" 
+               required>
+      </div>
+
+      <button class="btn btn-success w-100">Sign Up</button>
+    </form>
+  </div>
+</body>
