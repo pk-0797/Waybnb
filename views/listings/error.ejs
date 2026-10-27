@@ -1,11 +1,23 @@
 <% layout("/layouts/boilerplate.ejs") %>
-
 <body>
   <div class="container my-5">
     <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="alert alert-danger text-center shadow-sm" role="alert">
-          <h4 class="alert-heading mb-0"><%= message %></h4>
+      <div class="col-md-6 col-sm-10">
+        <div class="error-card text-center">
+          <div class="error-icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <h3 class="fw-bold mb-2">Oops! Something went wrong</h3>
+          <div
+            class="alert alert-danger border-0 rounded-3"
+            role="alert"
+            style="background: rgba(255, 90, 95, 0.08); color: #be123c"
+          >
+            <h5 class="alert-heading mb-0 fw-semibold"><%= message %></h5>
+          </div>
+          <a href="/listings" class="btn waybnb-btn-solid mt-3 px-4">
+            <i class="fa-solid fa-house me-1"></i> Back to Listings
+          </a>
         </div>
       </div>
     </div>

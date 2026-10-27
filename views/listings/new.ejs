@@ -1,58 +1,104 @@
 <% layout("/layouts/boilerplate.ejs") %>
-
 <body>
   <div class="container my-5">
-    <h2 class="text-center mb-4">Create New Listing</h2>
-
-    <form action="/listings" method="post" enctype="multipart/form-data" class="card p-4 shadow-sm">
-      
-      <div class="mb-3">
-        <input type="text" 
-               name="listing[title]" 
-               placeholder="Enter property name" 
-               required 
-               class="form-control">
+    <div class="mx-auto" style="max-width: 640px">
+      <div class="text-center mb-4">
+        <span class="waybnb-badge"
+          ><i class="fa-solid fa-plus me-1"></i> New Property</span
+        >
+        <h2 class="fw-bold mt-2 mb-1">Create New Listing</h2>
+        <p class="text-muted waybnb-subtitle">
+          Share your space with travellers around the world
+        </p>
       </div>
 
-      <div class="mb-3">
-        <input type="text" 
-               name="listing[description]" 
-               placeholder="Enter property description" 
-               required 
-               class="form-control">
-      </div>
+      <form
+        action="/listings"
+        method="post"
+        enctype="multipart/form-data"
+        class="card waybnb-form-card p-4 p-md-5"
+      >
+        <div class="mb-3">
+          <label class="form-label waybnb-label"
+            ><i class="fa-solid fa-house"></i> Property Name</label
+          >
+          <input
+            type="text"
+            name="listing[title]"
+            placeholder="Enter property name"
+            required
+            class="form-control waybnb-input"
+          />
+        </div>
 
-      <div class="mb-3">
-        <input type="number" 
-               name="listing[price]" 
-               placeholder="Enter property price" 
-               required 
-               class="form-control">
-      </div>
+        <div class="mb-3">
+          <label class="form-label waybnb-label"
+            ><i class="fa-solid fa-align-left"></i> Description</label
+          >
+          <input
+            type="text"
+            name="listing[description]"
+            placeholder="Enter property description"
+            required
+            class="form-control waybnb-input"
+          />
+        </div>
 
-      <div class="mb-3">
-        <input type="text" 
-               name="listing[location]" 
-               placeholder="Enter property location" 
-               required 
-               class="form-control">
-      </div>
+        <div class="row g-3">
+          <div class="col-md-6 mb-3">
+            <label class="form-label waybnb-label"
+              ><i class="fa-solid fa-indian-rupee-sign"></i> Price</label
+            >
+            <input
+              type="number"
+              name="listing[price]"
+              placeholder="Enter property price"
+              required
+              class="form-control waybnb-input"
+            />
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label waybnb-label"
+              ><i class="fa-solid fa-location-dot"></i> Location</label
+            >
+            <input
+              type="text"
+              name="listing[location]"
+              placeholder="Enter property location"
+              required
+              class="form-control waybnb-input"
+            />
+          </div>
+        </div>
 
-      <div class="mb-3">
-        <input type="text" 
-               name="listing[country]" 
-               placeholder="Enter country name" 
-               required 
-               class="form-control">
-      </div>
+        <div class="mb-3">
+          <label class="form-label waybnb-label"
+            ><i class="fa-solid fa-globe"></i> Country</label
+          >
+          <input
+            type="text"
+            name="listing[country]"
+            placeholder="Enter country name"
+            required
+            class="form-control waybnb-input"
+          />
+        </div>
 
-      <div class="mb-3">
-        <input type="file" 
-               name="listing[image]" 
-               class="form-control">
-      </div>
+        <div class="mb-4">
+          <label class="form-label waybnb-label"
+            ><i class="fa-solid fa-image"></i> Property Image</label
+          >
+          <input
+            type="file"
+            name="listing[image]"
+            class="form-control waybnb-input waybnb-file"
+          />
+        </div>
 
-      <button class="btn btn-success w-100">Add Listing</button>
-    </form>
+        <button class="btn waybnb-btn-solid w-100">
+          <i class="fa-solid fa-circle-plus me-1"></i> Add Listing
+        </button>
+      </form>
+    </div>
   </div>
 </body>

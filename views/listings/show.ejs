@@ -1,36 +1,42 @@
 <% layout("/layouts/boilerplate.ejs") %>
-
 <body>
   <div class="container my-5">
+    <a href="/listings" class="text-decoration-none fw-semibold mb-3 d-inline-block" style="color:#ff5a5f;"><i class="fa-solid fa-arrow-left me-1"></i> Back to listings</a>
 
     <!-- Property Split Layout -->
-    <div class="row g-4 align-items-start property-wrapper mb-5">
-      <!-- Image (50%) -->
+    <div class="row g-4 align-items-stretch property-wrapper mb-5">
       <div class="col-lg-6 col-md-12">
-        <div class="image-wrapper">
-          <img src="<%= listing.image.url %>" 
-               class="property-img" 
-               alt="<%= listing.title %>">
-          <span class="price-badge">₹ <%= listing.price.toLocaleString("en-IN") %> /-</span>
+        <div class="image-wrapper h-100" style="border-radius:.9rem;">
+          <img src="<%= listing.image.url %>" class="property-img" alt="<%= listing.title %>">
+          <span class="price-badge" style="font-size:1rem;">₹ <%= listing.price.toLocaleString("en-IN") %> / night</span>
         </div>
       </div>
 
-      <!-- Details (50%) -->
       <div class="col-lg-6 col-md-12">
-        <div class="property-details card shadow-sm p-4">
-          <h2 class="fw-bold mb-3"><%= listing.title %></h2>
-          <p class="text-muted mb-4"><%= listing.description %></p>
+        <div class="property-details card shadow-sm p-4 p-md-4 h-100">
+          <span class="waybnb-badge mb-2" style="width:fit-content;">Featured Stay</span>
+          <h2 class="fw-bold mb-2"><%= listing.title %></h2>
+          <p class="text-muted mb-3"><%= listing.description %></p>
 
-          <ul class="list-group list-group-flush mb-3">
-            <li class="list-group-item"><strong>👤 Owned By:</strong> <%= listing.owner.username %></li>
-            <li class="list-group-item"><strong>📍 Location:</strong> <%= listing.location %>, <%= listing.country %></li>
-          </ul>
+          <div class="mb-3">
+            <div class="detail-row">
+              <i class="fa-solid fa-user"></i>
+              <div class="d-flex align-items-center gap-2">
+                <span class="owner-avatar"><%= listing.owner.username.charAt(0).toUpperCase() %></span>
+                <span><strong>Owned By:</strong> <%= listing.owner.username %></span>
+              </div>
+            </div>
+            <div class="detail-row">
+              <i class="fa-solid fa-location-dot"></i>
+              <span><strong>Location:</strong> <%= listing.location %>, <%= listing.country %></span>
+            </div>
+          </div>
 
           <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
             <div class="d-flex gap-2 mt-3">
-              <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning btn-sm">✏️ Edit</a>
+              <a href="/listings/<%= listing._id %>/edit" class="btn waybnb-btn-solid btn-sm px-3"><i class="fa-solid fa-pen me-1"></i> Edit</a>
               <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
-                <button class="btn btn-danger btn-sm">🗑️ Delete</button>
+                <button class="btn btn-sm btn-outline-danger px-3" style="border-radius:10px; font-weight:600;"><i class="fa-solid fa-trash me-1"></i> Delete</button>
               </form>
             </div>
           <% } %>
@@ -40,49 +46,59 @@
 
     <!-- Reviews Section -->
     <div class="reviews-section">
-      <h3 class="mb-4 fw-bold text-secondary">⭐ Reviews</h3>
+      <h3 class="mb-4 fw-bold"><i class="fa-solid fa-star" style="color:#ff5a5f;"></i> Reviews</h3>
 
-      <% if(currUser) { %>
-        <div class="card p-4 mb-4 shadow-sm review-form">
-          <h5 class="mb-3">Write a Review</h5>
-          <form action="/listings/<%= listing._id %>/reviews" method="post">
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Enter Rating (1–5)</label>
-              <input type="number" name="review[rating]" min="1" max="5" required class="form-control">
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Your Review</label>
-              <textarea name="review[comments]" rows="3" required class="form-control"></textarea>
-            </div>
-            <button class="btn btn-primary w-100">Submit Review</button>
-          </form>
-        </div>
-      <% } %>
-
-      <% if(listing.reviews.length === 0) { %>
-        <p class="text-muted">No reviews yet. Be the first to review!</p>
-      <% } %>
-
-      <% for(let review of listing.reviews) { %>
-        <div class="card mb-3 shadow-sm review-card">
-          <div class="card-body">
-            <h6 class="fw-bold"><%= review.author.username %></h6>
-            <p>
-              <% for(let i=1; i<=5; i++) { %>
-                <i class="fa-star <%= i <= review.rating ? 'fa-solid text-warning' : 'fa-regular text-muted' %>"></i>
-              <% } %>
-            </p>
-            <p class="text-muted"><%= review.comments %></p>
-
-            <% if(currUser && currUser._id.equals(review.author._id)) { %>
-              <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
-                <button class="btn btn-sm btn-outline-danger">Delete</button>
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <% if(currUser) { %>
+            <div class="card p-4 shadow-sm review-form position-sticky" style="top:90px;">
+              <h5 class="mb-3 fw-bold">Write a Review</h5>
+              <form action="/listings/<%= listing._id %>/reviews" method="post">
+                <div class="mb-3">
+                  <label class="form-label fw-semibold waybnb-label">Rating (1–5)</label>
+                  <input type="number" name="review[rating]" min="1" max="5" required class="form-control waybnb-input" placeholder="e.g. 5">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold waybnb-label">Your Review</label>
+                  <textarea name="review[comments]" rows="3" required class="form-control waybnb-input" placeholder="Share your experience..."></textarea>
+                </div>
+                <button class="btn waybnb-btn-solid w-100">Submit Review</button>
               </form>
-            <% } %>
-          </div>
+            </div>
+          <% } %>
         </div>
-      <% } %>
+
+        <div class="col-lg-7">
+          <% if(listing.reviews.length === 0) { %>
+            <div class="text-center py-5 bg-white rounded-4 shadow-sm">
+              <div class="error-icon" style="width:55px;height:55px;font-size:1.4rem;"><i class="fa-regular fa-comment-dots"></i></div>
+              <p class="text-muted mb-0">No reviews yet. Be the first to review!</p>
+            </div>
+          <% } %>
+
+          <% for(let review of listing.reviews) { %>
+            <div class="card mb-3 shadow-sm review-card">
+              <div class="card-body">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <span class="review-avatar"><%= review.author.username.charAt(0).toUpperCase() %></span>
+                  <h6 class="fw-bold mb-0"><%= review.author.username %></h6>
+                </div>
+                <p class="mb-1">
+                  <% for(let i=1; i<=5; i++) { %>
+                    <i class="fa-star <%= i <= review.rating ? 'fa-solid text-warning' : 'fa-regular text-muted' %>"></i>
+                  <% } %>
+                </p>
+                <p class="text-muted mb-2"><%= review.comments %></p>
+                <% if(currUser && currUser._id.equals(review.author._id)) { %>
+                  <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
+                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                  </form>
+                <% } %>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      </div>
     </div>
   </div>
 </body>
-

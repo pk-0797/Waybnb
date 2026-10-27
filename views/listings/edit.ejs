@@ -1,50 +1,103 @@
 <% layout("/layouts/boilerplate.ejs") %>
+<body>
+  <div class="container my-5">
+    <div class="mx-auto" style="max-width: 640px">
+      <div class="text-center mb-4">
+        <span class="waybnb-badge"
+          ><i class="fa-solid fa-pen-to-square me-1"></i> Edit Mode</span
+        >
+        <h2 class="fw-bold mt-2 mb-1">Update Your Property</h2>
+        <p class="text-muted waybnb-subtitle">
+          You are updating details of property titled "<%= listing.title %>"
+        </p>
+      </div>
 
-  <body class="d-flex justify-content-center my-5">
-    <div class="container" style="max-width: 600px;">
-      <h5 class="text-center mb-4">
-        You are updating details of property titled "<%= listing.title %>"
-      </h5>
-
-      <div class="card shadow-sm p-4">
+      <div class="card waybnb-form-card p-4 p-md-5">
         <form action="/listings/<%= listing._id %>?_method=PUT" method="post">
-
           <div class="mb-3">
-            <label class="form-label">Property Title</label>
-            <input type="text" name="listing[title]" value="<%= listing.title %>" class="form-control"
-              placeholder="Enter property title" required>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Description</label>
-            <textarea name="listing[description]" class="form-control" rows="3" placeholder="Enter property description"
-              required><%= listing.description %></textarea>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Price (₹)</label>
-            <input type="number" name="listing[price]" value="<%= listing.price %>" class="form-control"
-              placeholder="Enter property price" required>
+            <label class="form-label waybnb-label"
+              ><i class="fa-solid fa-heading"></i> Property Title</label
+            >
+            <input
+              type="text"
+              name="listing[title]"
+              value="<%= listing.title %>"
+              class="form-control waybnb-input"
+              placeholder="Enter property title"
+              required
+            />
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Location</label>
-            <input type="text" name="listing[location]" value="<%= listing.location %>" class="form-control"
-              placeholder="Enter property location" required>
+            <label class="form-label waybnb-label"
+              ><i class="fa-solid fa-align-left"></i> Description</label
+            >
+            <textarea
+              name="listing[description]"
+              class="form-control waybnb-input"
+              rows="3"
+              placeholder="Enter property description"
+              required
+            >
+<%= listing.description %></textarea
+            >
           </div>
 
-          <div class="mb-3">
-            <label class="form-label">Country</label>
-            <input type="text" name="listing[country]" value="<%= listing.country %>" class="form-control"
-              placeholder="Enter country name" required>
+          <div class="row g-3">
+            <div class="col-md-6 mb-3">
+              <label class="form-label waybnb-label"
+                ><i class="fa-solid fa-indian-rupee-sign"></i> Price (₹)</label
+              >
+              <input
+                type="number"
+                name="listing[price]"
+                value="<%= listing.price %>"
+                class="form-control waybnb-input"
+                placeholder="Enter property price"
+                required
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label waybnb-label"
+                ><i class="fa-solid fa-location-dot"></i> Location</label
+              >
+              <input
+                type="text"
+                name="listing[location]"
+                value="<%= listing.location %>"
+                class="form-control waybnb-input"
+                placeholder="Enter property location"
+                required
+              />
+            </div>
           </div>
 
-          <div class="d-flex gap-2">
-            <button class="btn btn-primary flex-fill">Update Listing</button>
-            <a href="/listings/<%= listing._id %>" class="btn btn-secondary flex-fill">Cancel</a>
+          <div class="mb-4">
+            <label class="form-label waybnb-label"
+              ><i class="fa-solid fa-globe"></i> Country</label
+            >
+            <input
+              type="text"
+              name="listing[country]"
+              value="<%= listing.country %>"
+              class="form-control waybnb-input"
+              placeholder="Enter country name"
+              required
+            />
           </div>
 
+          <div class="d-flex flex-column flex-sm-row gap-2">
+            <button class="btn waybnb-btn-solid flex-fill">
+              <i class="fa-solid fa-check me-1"></i> Update Listing
+            </button>
+            <a
+              href="/listings/<%= listing._id %>"
+              class="btn waybnb-btn-outline flex-fill text-center"
+              ><i class="fa-solid fa-xmark me-1"></i> Cancel</a
+            >
+          </div>
         </form>
       </div>
     </div>
-  </body>
+  </div>
+</body>

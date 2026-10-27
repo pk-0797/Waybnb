@@ -1,15 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  --waybnb-primary: #ff5a5f;
+  --waybnb-hover: #e04e53;
+  --waybnb-light: #ff7b7f;
+  --waybnb-dark: #222222;
+  --waybnb-gray: #717171;
+  --waybnb-border: #dddddd;
+  --waybnb-bg: #f7f7f7;
+}
+
 html,
 body {
   height: 100%;
 }
-
 body {
   display: flex;
   flex-direction: column;
   font-family: "Open Sans", sans-serif;
   color: #333;
+  background: linear-gradient(135deg, #f7f7f7 0%, #ececec 100%);
+  min-height: 100vh;
 }
-
 h1,
 h2,
 h3,
@@ -18,155 +30,309 @@ h5,
 h6 {
   font-family: "Playfair Display", serif;
   margin-bottom: 1rem;
-  /* Optionally heavier weight */
+  color: var(--waybnb-dark);
 }
-
-.btn,
-.card-title,
-.navbar-brand {
-  /* You may choose to use Playfair or Open Sans depending on the context */
-  font-family: "Playfair Display", serif;
-}
-
 footer {
   margin-top: auto;
 }
-
-
-/* Container */
 .container h1 {
   font-size: 2.2rem;
   color: #222;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
-/* Card */
-.listing-card {
-  border-radius: 1rem;
-  overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* badges & buttons */
+.waybnb-badge {
+  display: inline-block;
+  background: rgba(255, 90, 95, 0.12);
+  color: var(--waybnb-primary);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+}
+.waybnb-subtitle {
+  font-size: 0.95rem;
+}
+.waybnb-btn-solid {
+  background: linear-gradient(
+    135deg,
+    var(--waybnb-primary) 0%,
+    var(--waybnb-light) 100%
+  );
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0.8rem 1.5rem;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+.waybnb-btn-solid:hover {
+  background: linear-gradient(
+    135deg,
+    var(--waybnb-hover) 0%,
+    var(--waybnb-primary) 100%
+  );
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 90, 95, 0.35);
+}
+.waybnb-btn-outline {
+  border: 2px solid var(--waybnb-border);
+  color: var(--waybnb-dark);
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.8rem 1.5rem;
+  transition: all 0.3s ease;
   background: #fff;
 }
-
-.listing-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+.waybnb-btn-outline:hover {
+  border-color: var(--waybnb-primary);
+  color: var(--waybnb-primary);
 }
 
-/* Image Wrapper */
+/* forms */
+.waybnb-form-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  overflow: hidden;
+}
+.waybnb-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--waybnb-dark);
+}
+.waybnb-label i {
+  color: var(--waybnb-primary);
+  margin-right: 0.35rem;
+}
+.waybnb-input {
+  border: 2px solid var(--waybnb-border);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  background: #fafafa;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+.waybnb-input:focus {
+  border-color: var(--waybnb-primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.15);
+  outline: none;
+}
+.waybnb-file {
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+}
+.waybnb-file::file-selector-button {
+  background: rgba(255, 90, 95, 0.1);
+  color: var(--waybnb-primary);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+/* Container cards */
+.listing-card {
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+.listing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
 .image-wrapper {
   position: relative;
   overflow: hidden;
+  border-radius: 0.75rem 0.75rem 0 0;
 }
-
 .listing-img {
   height: 230px;
   width: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
-
 .image-wrapper:hover .listing-img {
   transform: scale(1.08);
 }
-
-/* Price Badge */
 .price-badge {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0, 0, 0, 0.75);
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  font-size: 0.9rem;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--waybnb-dark);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-
-/* Card Body */
 .card-body {
   display: flex;
   flex-direction: column;
-  padding: 1rem 1.2rem;
+  padding: 1rem 1.2rem 1.2rem;
 }
-
 .card-title {
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   margin-bottom: 0.3rem;
 }
-
 .card-text {
   font-size: 0.9rem;
 }
-
-/* Explore Button */
 .explore-btn {
-  background: linear-gradient(135deg, #1d3557, #457b9d);
+  background: linear-gradient(135deg, var(--waybnb-primary), #ff7b7f);
   border: none;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  padding: 0.6rem 1rem;
+  border-radius: 0.6rem;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
   color: #fff;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  font-family: "Open Sans", sans-serif;
 }
-
 .explore-btn:hover {
-  background: linear-gradient(135deg, #e63946, #f1faee);
-  color: #1d3557;
-  transform: scale(1.05);
+  background: linear-gradient(
+    135deg,
+    var(--waybnb-hover),
+    var(--waybnb-primary)
+  );
+  color: #fff;
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(255, 90, 95, 0.35);
 }
 
-/* Wrapper for property split layout */
+/* Show page */
 .property-wrapper {
   display: flex;
   flex-wrap: wrap;
 }
-
-/* Image */
 .property-img {
   width: 100%;
-  height: 400px;
+  height: 420px;
   object-fit: cover;
-  border-radius: 0.75rem;
+  border-radius: 0.9rem;
   transition: transform 0.4s ease;
 }
-
-.image-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.75rem;
-}
-
 .image-wrapper:hover .property-img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
-
-/* Price Badge */
-.price-badge {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  background: rgba(0, 0, 0, 0.75);
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-/* Details */
 .property-details {
-  border-radius: 0.75rem;
+  border: none;
+  border-radius: 1rem;
+  background: #fff;
+}
+.owner-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--waybnb-primary), #ff7b7f);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+}
+.detail-row:last-child {
+  border-bottom: none;
+}
+.detail-row i {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 90, 95, 0.1);
+  color: var(--waybnb-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 /* Reviews */
 .review-form {
-  border-radius: 0.75rem;
-  background: #f8f9fa;
+  border: none;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+.review-card {
+  border: none !important;
+  border-left: 5px solid var(--waybnb-primary) !important;
+  border-radius: 0.7rem !important;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+.review-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #222;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
 }
 
-.review-card {
-  border-left: 5px solid #457b9d;
-  border-radius: 0.5rem;
+/* Error */
+.error-card {
+  border: none;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  padding: 3rem 2rem;
+}
+.error-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255, 90, 95, 0.12);
+  color: var(--waybnb-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin: 0 auto 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .property-img {
+    height: 300px;
+  }
+  .container h1 {
+    font-size: 1.7rem;
+  }
+}
+@media (max-width: 480px) {
+  .property-img {
+    height: 240px;
+  }
+  .listing-img {
+    height: 200px;
+  }
+  .waybnb-form-card {
+    border-radius: 12px;
+  }
 }
