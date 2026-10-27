@@ -19,6 +19,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
   }
 
   .signup-card {
@@ -28,6 +30,7 @@
     overflow: hidden;
     max-width: 420px;
     width: 100%;
+    margin: auto;
   }
 
   .signup-header {
@@ -178,8 +181,14 @@
   }
 
   @media (max-width: 480px) {
+    .signup-container {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+      min-height: auto;
+    }
+
     .signup-card {
-      margin: 1rem;
+      margin: 0 1rem;
       border-radius: 12px;
     }
 
