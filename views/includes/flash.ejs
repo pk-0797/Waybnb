@@ -1,17 +1,74 @@
-<% if(success && success.length) { %>
-    <div class="container mt-3">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <%= success %>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-    <% } %>
+<style>
+  @keyframes slideFlash {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-        <% if(error && error.length) { %>
-            <div class="container mt-3">
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <%= error %>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </div>
-            <% } %>
+  .waybnb-flash {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    padding: 1.15rem 1.35rem;
+    animation: slideFlash 0.35s ease-out both;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .waybnb-flash.alert-success {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    color: #047857;
+    border-left: 5px solid #10b981;
+  }
+
+  .waybnb-flash.alert-danger {
+    background: linear-gradient(135deg, #fff5f7 0%, #fff1f2 100%);
+    color: #be123c;
+    border-left: 5px solid #ff5a5f;
+  }
+
+  .waybnb-flash .flash-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+
+  .waybnb-flash .btn-close {
+    margin-left: auto;
+    filter: none;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+
+  .waybnb-flash .btn-close:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: 480px) {
+    .waybnb-flash {
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
+<% if(success && success.length) { %>
+  <div class="container mt-3">
+    <div class="alert alert-success alert-dismissible fade show waybnb-flash" role="alert">
+      <i class="fa-solid fa-circle-check flash-icon"></i>
+      <span><%= success %></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+<% } %>
+
+<% if(error && error.length) { %>
+  <div class="container mt-3">
+    <div class="alert alert-danger alert-dismissible fade show waybnb-flash" role="alert">
+      <i class="fa-solid fa-circle-exclamation flash-icon"></i>
+      <span><%= error %></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+<% } %>
